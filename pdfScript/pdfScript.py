@@ -1,37 +1,37 @@
-#!Python3
+#!Python
 from PyPDF2 import PdfFileMerger, PdfFileReader, PdfFileWriter
 import os, argparse
 
 
-linesPdfPath = './lines.pdf'
 
 # parse args
 parser = argparse.ArgumentParser(description='Short sample app')
 parser.add_argument('-a', action="store", dest='action', choices=['merge', 'notes'], required=True)
 parser.add_argument('-i', action="store", dest='input', nargs='+', required=True)
 parser.add_argument('-o', action="store", dest='outputFile', default='./output.pdf')
+parser.add_argument('--t', action="store", dest='template', default='./lines.pdf')
 
 # Now, parse the command line arguments and store the values in the `args` variable
 args = parser.parse_args()
 
- 
+
 '''
 insert between each slide, one blanck slide with some lines for taking notes
 '''
 def printWithLines():
-	# check if the input is multiple or is a directory 
+	# check if the input is multiple or is a directory
 	if len(args.input) != 1 or os.path.isdir(args.input[0]):
 		print("only one file permitted as input");
 		return
 	# rb stands for read bynary
 	inp = PdfFileReader(open(args.input[0], 'rb'))
-	line = PdfFileReader(open(linesPdfPath, 'rb')).pages[0]
+	template = PdfFileReader(open(args.template, 'rb')).pages[0]
 
 	out = PdfFileWriter()
 
 	for x in inp.pages:
 	    out.addPage(x)
-	    out.addPage(line)
+	    out.addPage(template)
 
 	with open(args.outputFile, 'wb') as f:
 	    out.write(f)
