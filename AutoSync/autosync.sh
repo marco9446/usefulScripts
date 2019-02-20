@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 local_rp=~/RavazDrive/
 external_rp="/Volumes/RavazPortable/RavazDrive/"
 
@@ -25,7 +24,8 @@ fi
 if test -e $external_rk ;then 
     exitcode=0
     notify '🔄 Sicronization started' 'Start syncronizing Ravaz_Key'
-    /usr/local/bin/unison  -batch -ignore="Path .DS_Store"  $local_rk $external_rk -fat ;
+    /usr/local/bin/unison  -batch -ignore="Path .DS_Store"  $local_rk ${external_rk}Ravaz_key/ -fat ;
+    rsync -au ${local_rp}Computer_initialization /Volumes/RAVA_KEY;
     rsync -u ~/RavazDrive/DocumentsCrypt $external_rk;
     date > ${external_rk}last_syncronization.txt
     notify '✅ Sicronization finished' 'Stop syncronizing Ravaz_Key'
