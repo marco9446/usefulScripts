@@ -1,17 +1,17 @@
 # PDF files manager
-> Simple cli script that allow you to merge pdf files or insert pages for tacking notes.
+> Simple cli script that allow you to merge pdf files or insert pages to take notes.
 
 
 I wrote this simple script in order to facilitate the process of merging pdf files and creating handouts with lines to take notes.
 
-The handouts option simply insert between each page of the pdf, one slide similar to the image below.
+The handouts option simply insert, between each page of the pdf, one slide similar to the image below.
 
-<img src="https://tinytutorials.files.wordpress.com/2010/05/picture-23.png" alt="Drawing" style="width: 10px;"/>
+<img src="lines.png" alt="Drawing" style="width: 10px;"/>
 
 
-Then you simply have to print the pdf with 6 slide per page, to obtain this result:
+Then you have to print the pdf with 6 slide per page in order to obtain this result:
 
-<img src="https://support.content.office.net/en-us/media/c3101854-fb81-4174-b50f-106f65042483.gif" alt="Drawing" style="width: 200px;"/>
+<img src="./print_sample.gif" alt="Drawing" style="width: 200px;"/>
 
 ## Dependencies
 This script is written in Python3 with the help of the [PyPDF2 library](https://github.com/mstamy2/PyPDF2), so make sure to install those components before run it.
@@ -36,8 +36,6 @@ This scripts support a variety of arguments in  order to suits your needs.
 ```sh
 $ python3 pdfScript.py -a merge -i ./pdfDirectory -o ./merged.pdf
 ```
-
-
 
 
 

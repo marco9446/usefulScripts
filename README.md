@@ -1,4 +1,6 @@
 # usefulScripts
 
-- [pdfScript](./pdfScript/) Simple cli script that allow you to merge pdf files or create handouts with lines to take notes.
-- [twrpCrowler](./twrpCrowler/) Script that notify you via pushbullet when a new version of the TWRP recovery has been released
+This repository contains a list of scripts that simplify my daily routine
+
+- [pdfScript](./PdfScript/) Simple cli script that allow you to merge pdf files or create handouts with lines to take notes.
+- [AutoSync](./AutoSync/) Automatically synchronize folders when external drives are mounted.

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+	<key>PATH</key> 
+	<string>/bin:/usr/bin:/usr/local/bin</string>
+        <key>Label</key> 
+        <string>com.startatmount.app</string> 
+        <key>Program</key> 
+        <string>/Users/marcoravazzini/usefulScripts/AutoSync/autosync.sh</string> 
+        <key>StartOnMount</key> 
+        <true/>
+	<key>StandardOutPath</key> 
+	<string>/tmp/test.stdout</string> 
+	<key>StandardErrorPath</key> 
+	<string>/tmp/test.stderr</string>
+    </dict>
+</plist>
