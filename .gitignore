@@ -5,3 +5,4 @@ twrpCrowler/tokens.py
 
 
 .DS_Store
+DataParser/data/**/*
