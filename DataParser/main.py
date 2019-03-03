@@ -1,17 +1,16 @@
-import os
-import re
+from parser_lib import Parser
+import matplotlib.pyplot as plt
+
+
 IS_DEBUG = True
 
+parser = Parser('', '/Users/marcoravazzini/usefulScripts/RavazDrive/Config_files/Android_OP3_Sync/Gps_Logger/')
 
-path = './data/dump_2019-03-01-15-05-31.log'
+data = parser.battery_parser()
+data['temperature'] = data['temperature'] / 10
+data['voltage'] = data['voltage'] /1000
+data[['level', 'voltage', 'temperature']].plot(grid=True)
 
+plt.show()
 
-with open(path, "r") as in_file:
-    for line in in_file:
-        total_time = re.search(r'totalTime=\"(\d\d:\d\d)\"', line)
-        name = re.search(r'package=(?!com\.google\.android\.|com\.android|org.lineageos|com\.qualcomm|com\.quicinc).*\.(.*) t', line)
-
-        if name and total_time:
-            print(name.group(1), total_time.group(1))
-        if 'ChooserCounts' in line:
-            break
+# print(data)

@@ -3,18 +3,15 @@ import os.path
 from enum import Enum
 import glob
 import re
-import datetime
 import pandas as pd
 from pandas.io.json import json_normalize
 import numpy as np
 
-# import matplotlib.pyplot as plt
 
 
 class Type(Enum):
     DATE = 1
     NUMBER = 2
-
 
 def haversine_np(lon1, lat1, lon2, lat2):
     """
@@ -35,7 +32,6 @@ def haversine_np(lon1, lat1, lon2, lat2):
     c = 2 * np.arcsin(np.sqrt(a))
     km = 6367 * c
     return km
-
 
 class Parser:
     def __init__(self, miband_basepath, location_basepath):
@@ -131,7 +127,6 @@ class Parser:
         main_df['dist'] = haversine_np(
             main_df.lon.shift(), main_df.lat.shift(), main_df.iloc[1:, 1],
             main_df.iloc[1:, 0])
-        print(main_df.to_string())
 
         return main_df
 
@@ -143,19 +138,24 @@ class Parser:
         counter = 0
         for file in files:
             with open(file, "r") as in_file:
+                time_range=''
                 for line in in_file:
+                    time_range_raw = re.search(r'timeRange="(.*),', line)
+                    if time_range_raw:
+                        time_range = time_range_raw.group(1)
                     total_time = re.search(r'totalTime=\"(.*)\" l', line)
                     name = re.search(
                         r'package=(?!com\.google\.android\.|com\.android|org.lineageos|com\.qualcomm|com\.quicinc).*\.(.*) t',
                         line)
 
                     if name and total_time:
-
                         usage = total_time.group(1) if len(total_time.group(1)) > 5 else '00:'+total_time.group(1)
-                        df.loc[counter] = [datetime.datetime.now(), name.group(1), usage]
+                        df.loc[counter] = [time_range, name.group(1), usage]
                         counter +=1
                     if 'ChooserCounts' in line:
                         break
+        df['time'] = pd.to_datetime(df.time)
+        df.set_index('time', inplace=True)
         df['usage'] = pd.to_timedelta(df.usage)
         return df
 
@@ -173,5 +173,4 @@ class Parser:
         main_df['time'] = pd.to_datetime(main_df.time, unit='ms')
         main_df.set_index('time', inplace=True)
         return main_df
-
 
